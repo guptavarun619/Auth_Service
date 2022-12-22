@@ -24,6 +24,29 @@ const create = async (req, res) => {
   }
 };
 
+const signIn = async (req, res) => {
+  try {
+    const authToken = await userService.signIn(
+      req.body.email,
+      req.body.password
+    );
+    res.status(200).json({
+      data: authToken,
+      success: true,
+      message: "Successfully signed in",
+      err: {},
+    });
+  } catch (error) {
+    res.status(500).json({
+      data: {},
+      success: false,
+      message: "Unable to Signin",
+      err: { error },
+    });
+  }
+};
+
 module.exports = {
   create,
+  signIn,
 };
