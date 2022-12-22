@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const bcrypt = require("bcrypt");
+// const UserRepository = require("./repository/user-repository");
 
 const { PORT } = require("./config/serverConfig");
 const apiRoutes = require("./routes/index");
@@ -14,8 +14,11 @@ const initializeServer = () => {
 
   app.use("/api", apiRoutes);
 
-  app.listen(PORT, () => {
+  app.listen(PORT, async () => {
     console.log(`Authentication Server started on PORT: ${PORT}`);
+    // const userRepository = new UserRepository();
+    // const response = await userRepository.getById(3);
+    // console.log(response);
   });
 };
 
