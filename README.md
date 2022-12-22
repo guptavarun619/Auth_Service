@@ -6,6 +6,7 @@
 - Execute `npm install` in the root directory of project
 - Create `.env` file in the root directory and add following vairable(s) :
   - `PORT = 4001` // or which ever port you wanna use.
+  - `JWT_KEY = <whatever 'string' you like or actually create a key, idk>`
 - Inside the `src/config` folder create a new file `config.json` and then add the following json for DB configurations :
 
 ```

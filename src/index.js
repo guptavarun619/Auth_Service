@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-// const UserRepository = require("./repository/user-repository");
+// const UserService = require("./services/user-service");
 
 const { PORT } = require("./config/serverConfig");
 const apiRoutes = require("./routes/index");
@@ -16,9 +16,18 @@ const initializeServer = () => {
 
   app.listen(PORT, async () => {
     console.log(`Authentication Server started on PORT: ${PORT}`);
-    // const userRepository = new UserRepository();
-    // const response = await userRepository.getById(3);
-    // console.log(response);
+
+    // const service = new UserService();
+    // const user = {
+    //   id: 3,
+    //   email: "ravena@ravenclaw.hw",
+    // };
+    // // const newToken = service.createToken(user);
+    // // console.log(newToken);
+    // const authToken =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJyYXZlbmFAcmF2ZW5jbGF3Lmh3IiwiaWF0IjoxNjcxNjk1OTAyLCJleHAiOjE2NzE2OTU5MzJ9.ppIA41euJc_xRjzBSYSGVZeQu-UuWMt8vIXT3PvkMOA";
+    // const verify = service.verifyToken(authToken);
+    // console.log(verify);
   });
 };
 
