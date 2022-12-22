@@ -49,6 +49,24 @@ class UserService {
     }
   }
 
+  async isAuthenticated(token) {
+    try {
+      const response = this.verifyToken(token);
+      if (!response) {
+        throw { error: "Invalid Token" };
+      }
+      // whatever business logic to check if the user still exists in DB
+      const user = await this.userRepository.getById(response.id);
+      if (!user) {
+        throw { error: "No user with the corresponding token exists" };
+      }
+      return user.id;
+    } catch (error) {
+      console.log("Something went wrong in the token authentication process");
+      throw error;
+    }
+  }
+
   verifyPassword(plainPassword, encryptedPassowrd) {
     try {
       return bcrypt.compareSync(plainPassword, encryptedPassowrd);
@@ -70,14 +88,10 @@ class UserService {
     }
   }
 
-  async verifyToken(authToken) {
+  verifyToken(authToken) {
     try {
       const jwtDecodedUser = jwt.verify(authToken, JWT_KEY);
-      console.log(jwtDecodedUser);
-      // whatever business logic to check if the user still exists in DB
-      const user = await this.userRepository.getById(jwtDecodedUser.id);
-      if (jwtDecodedUser.email != user.email) return false;
-      return true;
+      return jwtDecodedUser;
     } catch (error) {
       console.log("Something went wrong in token verification (service layer)");
       throw error;
