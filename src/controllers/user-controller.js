@@ -37,11 +37,12 @@ const signIn = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    res.status(500).json({
+    console.log(error);
+    res.status(error.statusCode).json({
       data: {},
       success: false,
-      message: "Unable to Signin",
-      err: { error },
+      message: error.message,
+      err: error.explaination,
     });
   }
 };

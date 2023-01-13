@@ -12,7 +12,10 @@ const initializeServer = () => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.use("/api", apiRoutes);
+  app.get("/auth/api/v1/ping", (req, res) => {
+    return res.json({ message: "Response from Auth service" });
+  });
+  app.use("/auth/api", apiRoutes);
 
   app.listen(PORT, async () => {
     console.log(`Authentication Server started on PORT: ${PORT}`);

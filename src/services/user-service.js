@@ -46,9 +46,14 @@ class UserService {
       const newAuthToken = this.createToken({ email: user.email, id: user.id });
       return newAuthToken;
     } catch (error) {
+      if (error.name == "AttributeNotFound") {
+        throw error;
+      }
+
       console.log(
         "Something went wrong in the sign-in process (service layer)"
       );
+      // console.log(error);
       throw error;
     }
   }
